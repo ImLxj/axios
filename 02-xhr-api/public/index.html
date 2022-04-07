@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>原生ajax</title>
+</head>
+
+<body>
+  <button id="btn">发送请求</button>
+  <script>
+    const btn = document.getElementById('btn')
+    btn.onclick = function () {
+      // 创建异步对象
+      const xhr = new XMLHttpRequest()
+      // 初始化
+      xhr.open('GET', 'http://127.0.0.1/api_text')
+      // 开启异步
+      xhr.send()
+      // 指定响应数据类型,如果时json，得到响应后自动解析响应体数据 
+      xhr.responseType = 'json'
+      /* // 响应时间的设置
+      xhr.timeout = 3000
+      // 响应时间超时的回调函数
+      xhr.ontimeout = () => {
+        console.log('超时了');
+      } */
+      // 异步响应结果的判断
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+          if (xhr.status >= 200 && xhr.status < 400) {
+            console.log('请求成功');
+            console.log(xhr.response);
+            // 响应状态文本
+            console.log(xhr.statusText);
+            // 获取指定名称响应头的值
+            console.log(xhr.getResponseHeader('date'));
+            // 获取所有响应头的值
+            console.log(xhr.getAllResponseHeaders());
+            // 
+          }
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>
